@@ -1,0 +1,51 @@
+[
+  {
+    "question": "Did the Fed change the federal funds rate between January and June 2026?",
+    "is_grounded": true,
+    "confidence": 1.0,
+    "retries_used": 0,
+    "sources_cited": [
+      "2026-01-28_fomc_statement.txt",
+      "2026-06-17_fomc_statement.txt"
+    ],
+    "faithfulness": NaN,
+    "answer_relevancy": NaN,
+    "context_precision": NaN
+  },
+  {
+    "question": "How did the Fed's description of Middle East risk change between January and March 2026?",
+    "is_grounded": true,
+    "confidence": 1.0,
+    "retries_used": 0,
+    "sources_cited": [
+      "2026-03-18_fomc_statement.txt"
+    ],
+    "faithfulness": NaN,
+    "answer_relevancy": NaN,
+    "context_precision": NaN
+  },
+  {
+    "question": "What reason did the June 2026 statement give for elevated inflation?",
+    "is_grounded": true,
+    "confidence": 1.0,
+    "retries_used": 0,
+    "sources_cited": [
+      "2026-06-17_fomc_statement.txt"
+    ],
+    "faithfulness": NaN,
+    "answer_relevancy": NaN,
+    "context_precision": NaN
+  },
+  {
+    "question": "What was the Fed's stance on quantitative easing bond purchases in 2026?",
+    "is_grounded": true,
+    "confidence": 1.0,
+    "retries_used": 0,
+    "sources_cited": [
+      "2026-06-17_fomc_statement.txt"
+    ],
+    "faithfulness": NaN,
+    "answer_relevancy": NaN,
+    "context_precision": NaN
+  }
+]

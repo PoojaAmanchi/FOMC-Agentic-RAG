@@ -1,0 +1,8 @@
+{
+  "name": "fomc-agentic-rag-frontend",
+  "version": "1.0.0",
+  "description": "Static frontend for the FOMC Agentic RAG API. No build step needed -- just plain HTML/CSS/JS.",
+  "scripts": {
+    "start": "npx serve . -l 3000"
+  }
+}

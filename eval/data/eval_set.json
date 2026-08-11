@@ -1,0 +1,18 @@
+[
+  {
+    "question": "Did the Fed change the federal funds rate between January and June 2026?",
+    "ground_truth": "No. The federal funds rate target range remained at 3-1/2 to 3-3/4 percent across the January, March, and June 2026 FOMC meetings."
+  },
+  {
+    "question": "How did the Fed's description of Middle East risk change between January and March 2026?",
+    "ground_truth": "The January 2026 statement did not mention the Middle East. The March 2026 statement added new language stating that 'the implications of developments in the Middle East for the U.S. economy are uncertain.'"
+  },
+  {
+    "question": "What reason did the June 2026 statement give for elevated inflation?",
+    "ground_truth": "The June 2026 statement attributed elevated inflation in part to supply shocks that drove price increases in certain sectors, including energy."
+  },
+  {
+    "question": "What was the Fed's stance on quantitative easing bond purchases in 2026?",
+    "ground_truth": "The provided documents do not contain information about bond purchase programs, so this cannot be answered from context."
+  }
+]

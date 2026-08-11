@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FOMC Agentic RAG</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <h1>FOMC Agentic RAG</h1>
+    <p class="subtitle">
+      Ask a question about Federal Reserve FOMC statements (Jan / March / June 2026).
+      Watch each step of the agent run live below.
+    </p>
+
+    <form id="query-form">
+      <input
+        type="text"
+        id="question-input"
+        placeholder="Did the Fed's language on inflation change between January and June 2026?"
+        autocomplete="off"
+      />
+      <button type="submit">Ask</button>
+    </form>
+
+    <div id="progress-list"></div>
+
+    <div id="answer-box" class="hidden">
+      <h2>Answer</h2>
+      <p id="answer-text"></p>
+      <div id="meta-row">
+        <span id="grounded-badge"></span>
+        <span id="confidence-badge"></span>
+        <span id="retries-badge"></span>
+      </div>
+      <div id="sources-box"></div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
