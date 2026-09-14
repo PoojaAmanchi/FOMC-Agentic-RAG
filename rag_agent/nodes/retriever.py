@@ -18,12 +18,7 @@ might not surface the best chunk. Four different phrasings of the same
 question, each embedded separately, catch matches a single phrasing
 might miss.
 
-THE TRADEOFF (be ready to explain this in an interview): more query
-variants means more embedding calls and more retrieved chunks to
-deduplicate -- higher cost and latency, and a wider net can pull in more
-noise alongside genuinely relevant chunks. This is exactly the
-precision/recall tradeoff the reference repo's own README documented
-honestly. We accept this cost only on comparison/contradiction questions
+We accept this only on comparison/contradiction questions
 below, where the benefit of catching cross-document matches is highest.
 
 DEDUPLICATION NOTE:
