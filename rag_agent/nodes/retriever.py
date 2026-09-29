@@ -36,6 +36,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from rag_agent.utils import extract_text
 from rag_agent.state import RAGState
+from rag_agent.nodes.verifier import _MAX_RETRIES
 
 load_dotenv()
 
@@ -113,19 +114,36 @@ def retriever_node(state: RAGState) -> dict:
     relevant_dates = state.get("relevant_dates") or []
     retry_count = state.get("retry_count") or 0
 
+    # FIX 1 -- escalating top_k instead of a flat one-time bump.
+    # Was: `if retry_count > 0: top_k += 4`, which plateaus at the same
+    # widened value for every retry (pass 2 and pass 3 both landed on the
+    # same top_k: 4 -> 8 -> 8). Scaling by retry_count instead means each
+    # retry genuinely casts a wider net than the last: 4 -> 8 -> 12.
     top_k = _TOP_K.get(query_type, 4)
-    if retry_count > 0:
-        top_k += 4  # widen search on retry
+    top_k += 4 * retry_count
 
     vectorstore = _get_vectorstore()
 
+    # FIX 2 -- progressively relax the date filter instead of keeping it
+    # fixed across every retry.
+    # Was: the router's relevant_dates filter applied identically on every
+    # pass. If the router extracted the wrong (or too-narrow) date, no
+    # amount of widening top_k helps, because every retry keeps searching
+    # the same restricted document set. On the final retry -- the last
+    # chance before the verifier gives up and returns a disclaimed answer
+    # -- drop the filter and search the full corpus as a last resort,
+    # in case the router's date extraction itself was the problem.
+    is_last_retry = retry_count >= _MAX_RETRIES
+
     search_kwargs = {"k": top_k}
-    if relevant_dates:
+    if relevant_dates and not is_last_retry:
         source_filenames = [f"{date}_fomc_statement.txt" for date in relevant_dates]
         if len(source_filenames) == 1:
             search_kwargs["filter"] = {"source": source_filenames[0]}
         else:
             search_kwargs["filter"] = {"source": {"$in": source_filenames}}
+    # else: no filter -- search the full corpus, since we're out of
+    # retries and the narrower, filtered search hasn't worked twice already.
 
     retriever = vectorstore.as_retriever(search_kwargs=search_kwargs)
 
